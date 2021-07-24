@@ -28,7 +28,7 @@ Logic board:
 20       |!EN |module bia ST2, pos 1  Tied to GND on header.          
 19       |!WR |display
 15       |LE  |latch register    
-
+| | |
 31,32        |GND|
 
 
