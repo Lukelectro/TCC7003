@@ -58,19 +58,17 @@ void TCC7003::construct(int D0,int D1,int D2,int D3,int D4,int D5,int D6,int D7,
   clear();
   setBrightness(3);
   
-  for(int i = 0; i<NUMDISP;i++)
-  {
-	_buffer[i] = ' ';  
-  }	
 }
 
 	
 void TCC7003::write(char text[])
 {
 	int len = strlen(text);
-	if (len>=NUMDISP) len = NUMDISP-1;
-	memcpy(_buffer,text,len);
-	refresh();
+	if (len>NUMDISP) len = NUMDISP;
+	
+	for(char disp=0;disp<len;disp++){
+		module_9443_setDigit(adress(disp),text[disp]);
+	}
 }
 	
 /* write at row 1 to 5, col 1-8*/	
@@ -86,8 +84,10 @@ void TCC7003::writeAt(int row, int col, char text[])
 	if(pos>=NUMDISP) pos = NUMDISP-1;
 	if(len>(NUMDISP-pos)) len = NUMDISP-pos;
 	
-	memcpy(&_buffer[pos],text,len);
-	refresh();
+	for(char disp=0;disp<len;disp++){
+		module_9443_setDigit(adress(disp+pos),text[disp]);
+	}
+
 }
 
 void TCC7003::module_9443_setDigit (char digit, char content) {
@@ -131,7 +131,6 @@ void TCC7003::control(char disp, char cword){
  void TCC7003::clear(void){
   for(char i=0;i<NUMDISP;i++){
     control(i,0x80);
-    _buffer[i]=' ';
     }
  }
  
@@ -143,9 +142,4 @@ void TCC7003::setBrightness (char br){
     }
   }
   
-  void TCC7003::refresh()
-{
-	for(char disp=0;disp<NUMDISP;disp++){
-		module_9443_setDigit(adress(disp),_buffer[disp]);
-	}
-}
+

@@ -61,12 +61,10 @@ class TCC7003
 		void writeAt(int row, int col, char text[]);
 	private:
 		int _D0,_D1,_D2,_D3,_D4,_D5,_D6,_D7,_EN,_WR,_LE;
-		char _buffer[NUMDISP];
 		void construct(int D0,int D1,int D2,int D3,int D4,int D5,int D6,int D7,int LE,int WR,int EN);
 		void module_9443_setDigit(char digit, char content);
 		char adress(char disp);
 		void writeData(byte Data);
-		void refresh(void);
 	};
 
 #endif
