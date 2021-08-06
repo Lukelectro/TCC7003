@@ -27,7 +27,7 @@ Logic board:
 12       |D7        |EN or !EN module via ST2, pos 1 is !EN ( ? - klopt dit ?)
  | | |
 17       |!EN |module via ST2 
-20       |!EN |module bia ST2, pos 1  Tied to GND on header.          
+20       |!EN |module via ST2, pos 1  Tied to GND on header.          
 19       |!WR |display
 15       |LE  |latch register    
 | | |
@@ -42,3 +42,6 @@ if no pins are given as arguments, these are the defaults:
 
 Otherwise alternatives can be given in this order: (D0,D1,D2,D3,D4,D5,D6,D7,LE,WR,EN). 
 * So that would be for example TCC7003 led_display(0,1,2,3,4,5,6,7,8,9,13); to use pin 13 as enble.
+
+### What's with all the !EN lines?###
+If you want to use multiple displays on 1 bus: The jumpers ST1 and ST2 can be used to select which of the 3 !EN lines activates the display. !EN lines are active low. (So it is like SPI "chip select".)
